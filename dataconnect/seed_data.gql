@@ -1,0 +1,58 @@
+mutation SeedData @transaction {
+  user_insertMany(data: [
+    {
+      firebaseUid: "uid_1",
+      email: "alice@example.com",
+      displayName: "Alice",
+      createdAt: "2023-01-01T00:00:00Z"
+    },
+    {
+      firebaseUid: "uid_2",
+      email: "bob@example.com",
+      displayName: "Bob",
+      createdAt: "2023-01-02T00:00:00Z"
+    },
+    {
+      firebaseUid: "uid_3",
+      email: "charlie@example.com",
+      displayName: "Charlie",
+      createdAt: "2023-01-03T00:00:00Z"
+    }
+  ])
+  
+  team_insertMany(data: [
+    {
+      name: "Engineering",
+      description: "Core platform team",
+      createdAt: "2023-02-01T00:00:00Z"
+    },
+    {
+      name: "Design",
+      description: "UX/UI team",
+      createdAt: "2023-02-05T00:00:00Z"
+    },
+    {
+      name: "Product",
+      description: "Product managers",
+      createdAt: "2023-02-10T00:00:00Z"
+    }
+  ])
+  
+  # Note: Requires querying or assuming IDs if not hardcoded. 
+  # In Seed scenarios, often keys are passed if using UUIDs generated in the same scope.
+  # Assuming the use of User/Team keys established by ID order or static references.
+  membership_insertMany(data: [
+    { userId: "550e8400-e29b-41d4-a716-446655440000", teamId: "550e8400-e29b-41d4-a716-446655440001", role: "admin" },
+    { userId: "550e8400-e29b-41d4-a716-446655440002", teamId: "550e8400-e29b-41d4-a716-446655440003", role: "member" }
+  ])
+
+  activityLog_insertMany(data: [
+    { userId: "550e8400-e29b-41d4-a716-446655440000", actionType: "login", timestamp: "2023-03-01T10:00:00Z" },
+    { userId: "550e8400-e29b-41d4-a716-446655440002", actionType: "update_profile", timestamp: "2023-03-01T11:00:00Z" }
+  ])
+
+  profileSettings_insertMany(data: [
+    { userId: "550e8400-e29b-41d4-a716-446655440000", theme: "dark", receiveNotifications: true },
+    { userId: "550e8400-e29b-41d4-a716-446655440002", theme: "light", receiveNotifications: false }
+  ])
+}

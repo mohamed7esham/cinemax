@@ -1,0 +1,140 @@
+mutation CreateUser($email: String!, $displayName: String) @auth(level: USER) {
+  user_insert(data: {
+    firebaseUid_expr: "auth.uid",
+    email: $email,
+    displayName: $displayName,
+    createdAt_expr: "request.time"
+  })
+}
+
+mutation UpdateUser($data: User_Data!) @auth(level: USER) {
+  user_update(key: { id_expr: "auth.uid" }, data: $data)
+}
+
+mutation DeleteUser @auth(level: USER) {
+  user_delete(key: { id_expr: "auth.uid" })
+}
+
+query GetCurrentUser @auth(level: USER) {
+  user(key: { id_expr: "auth.uid" }) {
+    email displayName bio
+  }
+}
+
+query ListUsers @auth(level: PUBLIC, insecureReason: "Public list of users for directory") {
+  users {
+    displayName email
+  }
+}
+
+mutation CreateProfileSettings($theme: String!, $receiveNotifications: Boolean!) @auth(level: USER) {
+  profileSettings_insert(data: {
+    userId_expr: "auth.uid",
+    theme: $theme,
+    receiveNotifications: $receiveNotifications
+  })
+}
+
+mutation UpdateProfileSettings($data: ProfileSettings_Data!) @auth(level: USER) {
+  profileSettings_update(key: { id_expr: "auth.uid" }, data: $data)
+}
+
+mutation DeleteProfileSettings @auth(level: USER) {
+  profileSettings_delete(key: { id_expr: "auth.uid" })
+}
+
+query GetProfileSettings @auth(level: USER) {
+  profileSettings(key: { id_expr: "auth.uid" }) {
+    theme receiveNotifications
+  }
+}
+
+query ListProfileSettings @auth(level: USER) {
+  profileSettingss {
+    userId theme
+  }
+}
+
+mutation LogActivity($actionType: String!) @auth(level: USER) {
+  activityLog_insert(data: {
+    userId_expr: "auth.uid",
+    actionType: $actionType,
+    timestamp_expr: "request.time"
+  })
+}
+
+mutation DeleteActivityLog($id: UUID!) @auth(level: USER) {
+  activityLog_delete(id: $id)
+}
+
+mutation UpdateActivityLog($id: UUID!, $data: ActivityLog_Data!) @auth(level: USER) {
+  activityLog_update(id: $id, data: $data)
+}
+
+query GetActivityLog($id: UUID!) @auth(level: USER) {
+  activityLog(id: $id) {
+    actionType timestamp
+  }
+}
+
+query ListMyActivity @auth(level: USER) {
+  activityLogs(where: { userId: { eq_expr: "auth.uid" } }) {
+    actionType timestamp
+  }
+}
+
+mutation CreateTeam($name: String!, $description: String) @auth(level: USER) {
+  team_insert(data: {
+    name: $name,
+    description: $description,
+    createdAt_expr: "request.time"
+  })
+}
+
+mutation UpdateTeam($id: UUID!, $data: Team_Data!) @auth(level: USER) {
+  team_update(id: $id, data: $data)
+}
+
+mutation DeleteTeam($id: UUID!) @auth(level: USER) {
+  team_delete(id: $id)
+}
+
+query GetTeam($id: UUID!) @auth(level: USER) {
+  team(id: $id) {
+    name description
+  }
+}
+
+query ListTeams @auth(level: PUBLIC, insecureReason: "Publicly visible teams") {
+  teams {
+    name description
+  }
+}
+
+mutation JoinTeam($teamId: UUID!, $role: String!) @auth(level: USER) {
+  membership_insert(data: {
+    userId_expr: "auth.uid",
+    teamId: $teamId,
+    role: $role
+  })
+}
+
+mutation UpdateMembership($userId: UUID!, $teamId: UUID!, $role: String!) @auth(level: USER) {
+  membership_update(key: { userId: $userId, teamId: $teamId }, data: { role: $role })
+}
+
+mutation LeaveTeam($userId: UUID!, $teamId: UUID!) @auth(level: USER) {
+  membership_delete(key: { userId: $userId, teamId: $teamId })
+}
+
+query GetMembership($userId: UUID!, $teamId: UUID!) @auth(level: USER) {
+  membership(key: { userId: $userId, teamId: $teamId }) {
+    role
+  }
+}
+
+query ListMemberships @auth(level: USER) {
+  memberships {
+    userId teamId role
+  }
+}

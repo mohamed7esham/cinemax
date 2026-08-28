@@ -1,0 +1,34 @@
+type User @table {
+  firebaseUid: String!
+  email: String!
+  displayName: String
+  avatarUrl: String
+  bio: String
+  createdAt: Timestamp!
+}
+
+type ProfileSettings @table {
+  user: User!
+  theme: String!
+  receiveNotifications: Boolean!
+}
+
+type ActivityLog @table {
+  user: User!
+  actionType: String!
+  timestamp: Timestamp!
+  ipAddress: String
+  userAgent: String
+}
+
+type Team @table {
+  name: String!
+  description: String
+  createdAt: Timestamp!
+}
+
+type Membership @table(key: ["user", "team"]) {
+  user: User!
+  team: Team!
+  role: String!
+}
