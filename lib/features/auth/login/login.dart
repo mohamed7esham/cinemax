@@ -3,8 +3,8 @@ import 'package:cinemax/core/widgets/custom_app_bar.dart';
 import 'package:cinemax/core/widgets/main_button.dart';
 import 'package:cinemax/features/auth/resetPassword/reset_password.dart';
 import 'package:cinemax/features/auth/widgets/custom_text_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -97,21 +97,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () async {
-                      final db = FirebaseFirestore.instance;
-                      await db.collection("users").get().then((event) {
-                        for (var doc in event.docs) {
-                          print(
-                            "/////----${doc.id} => ${doc.data()}////--\n//////////////////-----------/////////",
-                          );
-                        }
-                      });
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const ResetPasswordScreen(),
-                      //   ),
-                      // );
+                    onTap: () {
+                      // final db = FirebaseFirestore.instance;
+                      // await db.collection("users").get().then((event) {
+                      //   for (var doc in event.docs) {
+                      //     print(
+                      //       "/////----${doc.id} => ${doc.data()}////--\n//////////////////-----------/////////",
+                      //     );
+                      //   }
+                      // });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResetPasswordScreen(),
+                        ),
+                      );
                     },
                     child: Text(
                       'Forgot Passowrd?',

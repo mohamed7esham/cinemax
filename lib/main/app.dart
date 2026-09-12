@@ -1,4 +1,5 @@
-import 'package:cinemax/features/auth/login/login.dart';
+// import 'package:cinemax/features/onBoarding/on_boarding_screen.dart';
+import 'package:cinemax/features/homeScreen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
 
           theme: ThemeData(scaffoldBackgroundColor: Color(0xFF1F1D2B)),
 
-          home: LoginScreen(),
+          home: HomeScreen(),
         );
       },
     );

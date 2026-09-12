@@ -1,3 +1,5 @@
+import 'package:cinemax/core/app/block/cubit/movies_cubit.dart';
+import 'package:cinemax/features/homeScreen/Controller/home_cubit.dart';
 import 'package:cinemax/features/onBoarding/controller/on_boarding_cubit.dart';
 import 'package:cinemax/firebase_options.dart';
 import 'package:cinemax/main/app.dart';
@@ -10,8 +12,11 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => OnBoardingCubit())],
-
+      providers: [
+        BlocProvider(create: (_) => OnBoardingCubit()),
+        BlocProvider(create: (_) => HomeCubit()),
+        BlocProvider(create: (_) => MoviesCubit()..loadPopularMovies()),
+      ],
       child: const MyApp(),
     ),
   );

@@ -1,3 +1,4 @@
+import 'package:cinemax/features/auth/signUp/sign_up.dart';
 import 'package:cinemax/features/onBoarding/controller/on_boarding_cubit.dart';
 import 'package:cinemax/features/onBoarding/controller/on_boarding_state.dart';
 import 'package:cinemax/features/onBoarding/widgets/get_started_button.dart';
@@ -5,7 +6,6 @@ import 'package:cinemax/features/onBoarding/widgets/indicator_widget.dart';
 import 'package:cinemax/features/onBoarding/widgets/page_view_content_1.dart';
 import 'package:cinemax/features/onBoarding/widgets/page_view_content_2.dart';
 import 'package:cinemax/features/onBoarding/widgets/page_view_content_3.dart';
-import 'package:cinemax/features/splashScreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,7 +64,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SplashScreen(),
+                                builder: (context) => const SignUpScreen(),
                               ),
                             );
                           } else {
