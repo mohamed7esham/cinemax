@@ -24,16 +24,16 @@ class MovieCard extends StatelessWidget {
               SizedBox(
                 height: 177,
                 width: double.infinity,
-                // child: Image.network(
-                //   movie.imageUrl,
-                //   fit: BoxFit.cover,
-                //   errorBuilder: (context, error, stackTrace) {
-                //     return Container(
-                //       color: const Color(0xFF34313F),
-                //       child: const Icon(Icons.movie, color: Colors.white),
-                //     );
-                //   },
-                // ),
+                child: Image.network(
+                  movie.posterUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: const Color(0xFF34313F),
+                      child: const Icon(Icons.movie, color: Colors.white),
+                    );
+                  },
+                ),
               ),
 
               Positioned(
@@ -54,14 +54,14 @@ class MovieCard extends StatelessWidget {
 
                       const SizedBox(width: 3),
 
-                      // Text(
-                      //   // movie.rating.toString(),
-                      //   style: const TextStyle(
-                      //     color: Colors.orange,
-                      //     fontSize: 11,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
+                      Text(
+                        movie.voteAverage.toString(),
+                        style: const TextStyle(
+                          color: Colors.orange,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),

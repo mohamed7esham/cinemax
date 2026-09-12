@@ -1,9 +1,11 @@
+import 'package:cinemax/data/models/movie.dart';
 import 'package:cinemax/features/homeScreen/widgets/movie_info_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TodayMovie extends StatelessWidget {
-  const TodayMovie({super.key});
+  final Movie movie;
+  const TodayMovie({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,21 @@ class TodayMovie extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.r),
-
-              child: Image.asset(
-                'assets/images/spiderman.jpg',
-
+              child: Image.network(
+                'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                fit: BoxFit.cover,
                 width: 105.w,
                 height: 130.h,
-
-                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: const Color(0xFF34313F),
+                    child: const Icon(
+                      Icons.movie,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  );
+                },
               ),
             ),
 
@@ -48,7 +57,7 @@ class TodayMovie extends StatelessWidget {
                     SizedBox(width: 2.w),
 
                     Text(
-                      '4.5',
+                      movie.voteAverage.toStringAsFixed(1),
 
                       style: TextStyle(
                         color: Colors.orange,
@@ -92,7 +101,7 @@ class TodayMovie extends StatelessWidget {
 
               // TITLE
               Text(
-                'Spider-Man No Way..',
+                movie.title,
 
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -106,7 +115,7 @@ class TodayMovie extends StatelessWidget {
 
               SizedBox(height: 10.h),
 
-              MovieInfo(icon: Icons.calendar_month, text: '2021'),
+              MovieInfo(icon: Icons.calendar_month, text: movie.releaseDate),
 
               SizedBox(height: 8.h),
 
